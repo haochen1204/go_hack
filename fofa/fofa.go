@@ -1,12 +1,12 @@
-package fofa
+package github.com/haochen1204/go_hack
 
 const BaseURL = "https://fofa.info"
 
-type Client struct {
+type FoFa_Client struct {
 	email  string
 	apiKey string
 }
 
-func New(email string, apiKey string) *Client {
+func New_FoFa_Client(email string, apiKey string) *Client {
 	return &Client{email: email, apiKey: apiKey}
 }

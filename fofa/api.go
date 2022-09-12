@@ -1,4 +1,4 @@
-package fofa
+package github.com/haochen1204/go_hack
 
 import (
 	"encoding/json"
@@ -20,7 +20,7 @@ type APIInfo struct {
 	FofaServer bool   `json:"fofa_server"`
 }
 
-func (s *Client) APIInfo() (*APIInfo, error) {
+func (s *Fofa_Client) APIInfo() (*APIInfo, error) {
 	res, err := http.Get(fmt.Sprintf("%s/api/v1/info/my?email=%s&key=%s", BaseURL, s.email, s.apiKey))
 	if err != nil {
 		return nil, err
