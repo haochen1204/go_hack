@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type APIInfo struct {
+type Fofa_APIInfo struct {
 	Error      bool   `json:"error"`
 	Email      string `json:"email"`
 	UserName   string `json:"username"`
@@ -20,14 +20,14 @@ type APIInfo struct {
 	FofaServer bool   `json:"fofa_server"`
 }
 
-func (s *Fofa_Client) APIInfo() (*APIInfo, error) {
+func (s *Fofa_Client) APIInfo() (*FoFa_APIInfo, error) {
 	res, err := http.Get(fmt.Sprintf("%s/api/v1/info/my?email=%s&key=%s", BaseURL, s.email, s.apiKey))
 	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
 
-	var ret APIInfo
+	var ret Fofa_APIInfo
 	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		return nil, err
 	}

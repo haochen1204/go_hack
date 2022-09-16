@@ -7,6 +7,6 @@ type FoFa_Client struct {
 	apiKey string
 }
 
-func New_FoFa_Client(email string, apiKey string) *Client {
-	return &Client{email: email, apiKey: apiKey}
+func New_FoFa_Client(email string, apiKey string) *Fofa_Client {
+	return &FoFa_Client{email: email, apiKey: apiKey}
 }
