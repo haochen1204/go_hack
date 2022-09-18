@@ -66,7 +66,7 @@ type Fofa_InfoSearch struct {
 	Full    bool
 }
 
-func New_FoFa_Client(email string, apiKey string) *Fofa_Client {
+func New_FoFa_Client(email string, apiKey string) *FoFa_Client {
 	return &FoFa_Client{email: email, apiKey: apiKey}
 }
 
@@ -98,7 +98,7 @@ func (s *Fofa_Client) APIInfo() (*FoFa_APIInfo, error) {
 	}
 	defer res.Body.Close()
 
-	var ret Fofa_APIInfo
+	var ret FoFa_APIInfo
 	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		return nil, err
 	}
