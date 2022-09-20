@@ -60,7 +60,7 @@ type FoFa_MsgSearch struct {
 	Results []FoFa_Host `json:"results"`
 }
 
-type Fofa_InfoSearch struct {
+type FoFa_InfoSearch struct {
 	Qbase64 string
 	Fields  string
 	Page    int
@@ -72,13 +72,13 @@ func New_FoFa_Client(email string, apiKey string) *FoFa_Client {
 	return &FoFa_Client{email: email, apiKey: apiKey}
 }
 
-func New_Fofa_InfoSearch(q string) *Fofa_InfoSearch {
+func New_FoFa_InfoSearch(q string) *FoFa_InfoSearch {
 	q = base64.StdEncoding.EncodeToString([]byte(q))
-	p := Fofa_InfoSearch{Qbase64: q, Fields: "no", Page: 0, Size: 0, Full: false}
+	p := FoFa_InfoSearch{Qbase64: q, Fields: "no", Page: 0, Size: 0, Full: false}
 	return &p
 }
 
-func (s *FoFa_Client) HostSearch(q *Fofa_InfoSearch) (*FoFa_MsgSearch, error) {
+func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_MsgSearch, error) {
 	res, err := http.Get(
 		fmt.Sprintf("%s/api/v1/search/all?email=%s&key=%s&qbase64=%s", BaseURL, s.email, s.apiKey, q.Qbase64),
 	)
