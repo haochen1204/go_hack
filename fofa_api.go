@@ -59,12 +59,10 @@ func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_Host, error) {
 	res, err := http.Get(
 		fmt.Sprintf("%s/api/v1/search/all?email=%s&key=%s&qbase64=%s", BaseURL, s.email, s.apiKey, q.Qbase64),
 	)
-	fmt.Println(fmt.Sprintf("%s/api/v1/search/all?email=%s&key=%s&qbase64=%s", BaseURL, s.email, s.apiKey, q.Qbase64))
 	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
-	fmt.Println(res.Body)
 	var ret FoFa_Host
 	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		return nil, err
