@@ -29,35 +29,12 @@ type FoFa_APIInfo struct {
 }
 
 type FoFa_Host struct {
-	Ip              int    `json:"ip"`
-	Port            int    `json:"port"`
-	Protocol        string `json:"protocol"`
-	Country         int    `json:"country"`
-	Country_Name    string `json:"country_name"`
-	Region          string `json:"region"`
-	City            string `json:"city"`
-	Longitude       string `json:"logitude"`
-	As_Number       string `json:"as_number"`
-	As_OrganizAtion string `json:"as_organization"`
-	Host            string `json:"host"`
-	Domain          string `json:"domain"`
-	Os              string `json:"os"`
-	Server          string `json:"server"`
-	Icp             string `json:"icp"`
-	Title           string `json:"title"`
-	Jarm            string `json:"jarm"`
-	Header          string `json:"header"`
-	Banner          string `json:"banner"`
-	Cert            string `json:"cert"`
-}
-
-type FoFa_MsgSearch struct {
-	Error   bool        `json:"error"`
-	Size    int         `json:"size"`
-	Page    int         `json:"page"`
-	Mode    string      `json:"mode"`
-	Query   string      `json:"query"`
-	Results []FoFa_Host `json:"results"`
+	Error   bool     `json:"error"`
+	Size    int      `json:"size"`
+	Page    int      `json:"page"`
+	Mode    string   `json:"mode"`
+	Query   string   `json:"query"`
+	Results []string `json:"results"`
 }
 
 type FoFa_InfoSearch struct {
@@ -78,7 +55,7 @@ func New_FoFa_InfoSearch(q string) *FoFa_InfoSearch {
 	return &p
 }
 
-func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_MsgSearch, error) {
+func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_Host, error) {
 	res, err := http.Get(
 		fmt.Sprintf("%s/api/v1/search/all?email=%s&key=%s&qbase64=%s", BaseURL, s.email, s.apiKey, q.Qbase64),
 	)
@@ -87,7 +64,7 @@ func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_MsgSearch, error) {
 	}
 	defer res.Body.Close()
 
-	var ret FoFa_MsgSearch
+	var ret FoFa_Host
 	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		return nil, err
 	}
