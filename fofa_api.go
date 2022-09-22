@@ -63,7 +63,7 @@ func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_Host, error) {
 		return nil, err
 	}
 	defer res.Body.Close()
-
+	fmt.Println(res.Body)
 	var ret FoFa_Host
 	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		return nil, err
