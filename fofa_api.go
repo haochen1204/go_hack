@@ -29,12 +29,12 @@ type FoFa_APIInfo struct {
 }
 
 type FoFa_Host struct {
-	Error   bool     `json:"error"`
-	Size    int      `json:"size"`
-	Page    int      `json:"page"`
-	Mode    string   `json:"mode"`
-	Query   string   `json:"query"`
-	Results []string `json:"results"`
+	Error   bool       `json:"error"`
+	Size    int        `json:"size"`
+	Page    int        `json:"page"`
+	Mode    string     `json:"mode"`
+	Query   string     `json:"query"`
+	Results [][]string `json:"results"`
 }
 
 type FoFa_InfoSearch struct {
