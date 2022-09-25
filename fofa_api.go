@@ -56,9 +56,21 @@ func New_FoFa_InfoSearch(q string) *FoFa_InfoSearch {
 }
 
 func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_Host, error) {
-	res, err := http.Get(
-		fmt.Sprintf("%s/api/v1/search/all?email=%s&key=%s&qbase64=%s", BaseURL, s.email, s.apiKey, q.Qbase64),
-	)
+	api_url := fmt.Sprintf("%s/api/v1/search/all?email=%s&key=%s&qbase64=%s", BaseURL, s.email, s.apiKey, q.Qbase64)
+	if q.Fields != "no" {
+		api_url = api_url + fmt.Sprintf("&fields=%s", q.Fields)
+	}
+	if q.Page != 0 {
+		api_url = api_url + fmt.Sprintf("&page=%d", q.Page)
+	}
+	if q.Size != 0 {
+		api_url = api_url + fmt.Sprintf("&size=%d", q.Page)
+	}
+	if q.Full != false {
+		api_url = api_url + "&full=ture"
+	}
+	fmt.Println(api_url)
+	res, err := http.Get(api_url)
 	if err != nil {
 		return nil, err
 	}
