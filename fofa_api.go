@@ -69,7 +69,6 @@ func (s *FoFa_Client) HostSearch(q *FoFa_InfoSearch) (*FoFa_Host, error) {
 	if q.Full != false {
 		api_url = api_url + "&full=ture"
 	}
-	fmt.Println(api_url)
 	res, err := http.Get(api_url)
 	if err != nil {
 		return nil, err
